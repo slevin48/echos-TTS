@@ -1,0 +1,4 @@
+gTTS
+beautifulsoup4
+pandas
+streamlit

@@ -3,6 +3,13 @@ import urllib.request as urllib2
 from bs4 import BeautifulSoup
 from gtts import gTTS 
 import pandas as pd
+import os
+
+try:
+    os.mkdir("audio")
+except:
+    pass
+
 
 def get_echos_articles():
     # "https://www.lesechos.fr/"
@@ -10,7 +17,7 @@ def get_echos_articles():
     res = f.read()
     soup = BeautifulSoup(res, 'html.parser')
     # articles = [i.text for i in soup.find_all("h3")]
-    list = soup.find_all("a",class_= "sc-1560xb1-0 fUqzcK sc-1ttlxdz-2 bxQRWI")
+    list = soup.find_all("a",class_= "sc-1560xb1-0 fefOcI sc-2xhzwz-0 cGgeyg")
     articles = [i['title'] for i in list]
     links = [i['href'] for i in list]
     dict = {'articles': articles, 'links': links} 
@@ -23,14 +30,14 @@ def get_echos_title(article):
     f = urllib2.urlopen("https://www.lesechos.fr"+article)
     res = f.read()
     soup = BeautifulSoup(res, 'html.parser')
-    title = soup.find("h1",class_= "sc-AxirZ sc-1ohdft1-0 leQiFa").text
+    title = soup.find("h1").text.replace("Contenu réservé aux abonnés","")
     return title
 
 def get_echos_abstract(article):
     f = urllib2.urlopen("https://www.lesechos.fr"+article)
     res = f.read()
     soup = BeautifulSoup(res, 'html.parser')
-    abstract = soup.find("p",class_= "sc-AxirZ sc-1ohdft1-0 ejcVmy").text
+    abstract = soup.find("p",class_= "sc-14kwckt-6 sc-1ohdft1-0 hqULrA bISRZO").text
     return abstract
 
 def tts(mytext,desc):

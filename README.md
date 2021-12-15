@@ -2,3 +2,4 @@
 
 Text to Speech application from the French newspaper "Les Echos"
 
+https://user-images.githubusercontent.com/12418115/146182551-400f9c4b-34a5-491d-9c2e-7505811d0909.mp4
